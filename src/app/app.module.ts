@@ -15,6 +15,7 @@ import { AppState } from './store/app.state.interface';
 import { GlobalEffects } from './store/globals/globals.effects';
 import { globalsReducer } from './store/globals/globals.reducer';
 import { TodoComponent } from './components/todo/todo.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function logger(reducer: ActionReducer<any>): any {
   return storeLogger()(reducer);
@@ -30,6 +31,8 @@ export const metaReducers = environment.production ? [] : [logger];
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({} as ActionReducerMap<AppState>, {
       metaReducers,
       runtimeChecks: {

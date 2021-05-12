@@ -1,1 +1,5 @@
-<p>todo works!</p>
+<form #toDoForm class="text-center border border-light p-5" >
+    <input type="text"  name="todoName" [(ngModel)]="todoName" class="form-control mb-4" placeholder="Name" >
+    <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="addToDo()"
+    mdbWavesEffect>Add To Do</button>
+</form>

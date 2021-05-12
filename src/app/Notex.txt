@@ -1,0 +1,4 @@
+//Set up Redux
+1/ Everything in app.state interface is in our Store
+2. The reducer gets matched with our "Global State" this can be seen in the app.module.ts
+3.
