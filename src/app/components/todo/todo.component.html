@@ -1,5 +1,11 @@
-<form #toDoForm class="text-center border border-light p-5" >
-    <input type="text"  name="todoName" [(ngModel)]="todoName" class="form-control mb-4" placeholder="Name" >
-    <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="addToDo()"
-    mdbWavesEffect>Add To Do</button>
-</form>
+<div >
+    <ul>
+        <li *ngFor="let toDoItem of toDoItems">{{toDoItem.name}}<button type="button" mdbBtn color="primary" class="relative waves-light" (click)="deleteToDo(toDoItem)"
+            mdbWavesEffect>Delete To Do</button></li>
+    </ul>
+    <form #toDoForm class="text-center border border-light p-5" >
+        <input type="text"  name="todoName" [(ngModel)]="todoName" class="form-control mb-4" placeholder="Name" >
+        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="addToDo()"
+        mdbWavesEffect>Add To Do</button>       
+    </form>
+</div>

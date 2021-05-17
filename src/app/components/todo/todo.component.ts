@@ -4,6 +4,7 @@ import { ToDo } from 'src/app/models/toDo';
 import { TodoService } from 'src/app/services/todo.service';
 import { AppState } from 'src/app/store/app.state.interface';
 import { sessionSelected } from 'src/app/store/globals/globals.selectors';
+import{Guid} from 'guid-typescript';
 
 @Component({
   selector: 'app-todo',
@@ -13,6 +14,7 @@ import { sessionSelected } from 'src/app/store/globals/globals.selectors';
 export class TodoComponent implements OnInit {
 
   todoName: string = "";
+  toDoId: string = "";
   toDoItems:ToDo[] = []
 
   constructor(private todoservice:TodoService, private store: Store<AppState>) { 
@@ -28,8 +30,9 @@ export class TodoComponent implements OnInit {
   }
 
   addToDo(){
-    this.todoservice.addToDo({name: this.todoName, toDoId:""} as ToDo)
-    
-
+    this.todoservice.addToDo({name: this.todoName, toDoId: Guid.create().toString()} as ToDo)
+  }
+  deleteToDo(toDoItem:ToDo){
+    this.todoservice.deleteToDo(toDoItem.toDoId)
   }
 }

@@ -1,9 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { TypedAction } from "@ngrx/store/src/models";
 import { Session } from "src/app/models/session";
-import { ToDo } from "src/app/models/toDo";
-import { User } from "src/app/models/user";
-import { actionOnAddingNewItem, actionOnPageLoad } from "./globals.actions";
+import { actionOnAddingNewItem, actionOnDeletingNewItem, actionOnPageLoad } from "./globals.actions";
 
 //Defining what our global state object looks like
 export interface GlobalState {
@@ -27,6 +25,14 @@ const GLOBALS_REDUCER = createReducer(
         ...state,
         //it works like push
         session: {...state.session, toDos:[...state.session.toDos,action.toDos]} 
+    })),
+
+    on(actionOnDeletingNewItem, (state, action) => ({
+        ...state,
+        //it works like push  //filter is looping if 
+        session: {...state.session, toDos: state.session.toDos.filter((toDos)=>{
+            return toDos.toDoId !== action.toDoId
+        })} 
     }))
     
 )

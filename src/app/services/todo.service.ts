@@ -6,7 +6,7 @@ import { Session } from '../models/session';
 import { ToDo } from '../models/toDo';
 import { User } from '../models/user';
 import { AppState } from '../store/app.state.interface';
-import { actionOnAddingNewItem, actionOnPageLoad } from '../store/globals/globals.actions';
+import { actionOnAddingNewItem, actionOnDeletingNewItem, actionOnPageLoad } from '../store/globals/globals.actions';
 import { sessionSelected } from '../store/globals/globals.selectors';
 
 @Injectable({
@@ -14,21 +14,28 @@ import { sessionSelected } from '../store/globals/globals.selectors';
 })
 export class TodoService {
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) { 
+      this.store.select(sessionSelected).subscribe((session)=>{
+        if(session)
+      localStorage.setItem("1", JSON.stringify(session))
+    })
+  }
 
   addToDo(toDoItem:ToDo){
     //take the toDoItem  put it in the store using our action
     this.store.dispatch(actionOnAddingNewItem({toDos:toDoItem})) //JSON.parse takes a string and puts it into an object.
-    this.store.select(sessionSelected).subscribe((session)=>{
-      localStorage.setItem("1", JSON.stringify(session))
-    })
+    
+  }
+
+  deleteToDo(toDoId: string){
+    //take the toDoItem  put it in the store using our action
+  
+     this.store.dispatch(actionOnDeletingNewItem({toDoId:toDoId})) //JSON.parse takes a string and puts it into an object.  
 
   }
 
   OnPageLoad(){
     if(localStorage.length === 0){
-
-      const guid = Guid.create();
       const session = {user:{userId:Guid.create().toString()}, toDos:[]}
 
       localStorage.setItem("1", JSON.stringify(session)) //JSON.stringify take object and puts it into a string
@@ -42,3 +49,8 @@ export class TodoService {
     }
   }
 }
+
+//Filter, texbox, create a selector that only returns toDos that have a name that match our textbox  and in the componet
+//chgange toDo array 
+
+//Do autofill, a search filter based on selector. and felter array that is available.
