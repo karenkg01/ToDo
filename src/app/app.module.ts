@@ -16,6 +16,7 @@ import { GlobalEffects } from './store/globals/globals.effects';
 import { globalsReducer } from './store/globals/globals.reducer';
 import { TodoComponent } from './components/todo/todo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from './Pipes/filter.pipe';
 
 export function logger(reducer: ActionReducer<any>): any {
   return storeLogger()(reducer);
@@ -26,7 +27,8 @@ export const metaReducers = environment.production ? [] : [logger];
 @NgModule({
   declarations: [
     AppComponent,
-    TodoComponent
+    TodoComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

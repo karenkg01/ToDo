@@ -1,11 +1,25 @@
 <div >
-    <ul>
-        <li *ngFor="let toDoItem of toDoItems">{{toDoItem.name}}<button type="button" mdbBtn color="primary" class="relative waves-light" (click)="deleteToDo(toDoItem)"
-            mdbWavesEffect>Delete To Do</button></li>
-    </ul>
-    <form #toDoForm class="text-center border border-light p-5" >
-        <input type="text"  name="todoName" [(ngModel)]="todoName" class="form-control mb-4" placeholder="Name" >
-        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="addToDo()"
-        mdbWavesEffect>Add To Do</button>       
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <input type = "text" class="form-control" name="searchCriteria" [(ngModel)]= "searchCriteria" placeholder="Search by Name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngFor="let toDoItem of toDoItems | filter:searchCriteria" class="my-3" [attr.classname]="toDoItem">
+                    <div [toDoItem]="toDoItem">{{toDoItem.name}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<ul>
+    <li *ngFor="let toDoItem of filteredtoDoItems">{{toDoItem.name}}<button type="button" mdbBtn color="primary" class="relative waves-light" (click)="deleteToDo(toDoItem)"
+        mdbWavesEffect>Delete To Do</button></li>
+</ul>
+<form #toDoForm class="text-center border border-light p-5" >
+    <input type="text"  name="todoName" [(ngModel)]="todoName" class="form-control mb-4" placeholder="Name" >
+    <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="addToDo()"
+    mdbWavesEffect>Add To Do</button>       
+</form><br>

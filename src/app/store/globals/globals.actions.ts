@@ -18,3 +18,7 @@ export const actionOnDeletingNewItem = createAction(
     '[Global] Item Deleted',
     props<{toDoId:string}>()
 )
+export const actionOnSearchNewItems = createAction(
+    '[Global] Found Item',
+    props<{toDoId:string}>()
+)

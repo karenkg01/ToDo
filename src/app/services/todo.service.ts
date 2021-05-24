@@ -6,7 +6,7 @@ import { Session } from '../models/session';
 import { ToDo } from '../models/toDo';
 import { User } from '../models/user';
 import { AppState } from '../store/app.state.interface';
-import { actionOnAddingNewItem, actionOnDeletingNewItem, actionOnPageLoad } from '../store/globals/globals.actions';
+import { actionOnAddingNewItem, actionOnDeletingNewItem, actionOnPageLoad, actionOnSearchNewItems } from '../store/globals/globals.actions';
 import { sessionSelected } from '../store/globals/globals.selectors';
 
 @Injectable({
@@ -31,6 +31,13 @@ export class TodoService {
     //take the toDoItem  put it in the store using our action
   
      this.store.dispatch(actionOnDeletingNewItem({toDoId:toDoId})) //JSON.parse takes a string and puts it into an object.  
+
+  }
+  
+  searchToDo(toDoId: string){
+    //take the toDoItem  put it in the store using our action
+  
+     this.store.dispatch(actionOnSearchNewItems({toDoId:toDoId})) //JSON.parse takes a string and puts it into an object.  
 
   }
 
